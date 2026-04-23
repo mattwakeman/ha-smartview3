@@ -37,11 +37,6 @@ class SmartviewBinaryDescription:
     name: str | None = None
     translation_key: str | None = None
 
-    @property
-    def entity_registry_enabled_default(self) -> bool:
-        """Return if the entity should be enabled when first added to the entity registry."""
-        return self.enabled_default
-
 
 BINARY_DESCRIPTIONS: tuple[SmartviewBinaryDescription, ...] = (
     SmartviewBinaryDescription(
@@ -85,6 +80,7 @@ class Smartview3BinarySensor(
         self._attr_unique_id = f"{entry.entry_id}_{description.key}"
         self._attr_name = description.key
         self._attr_device_class = description.device_class
+        self._attr_force_update = description.force_update
 
     @property
     def device_info(self) -> DeviceInfo:

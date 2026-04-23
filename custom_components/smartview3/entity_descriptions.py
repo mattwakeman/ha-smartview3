@@ -32,21 +32,10 @@ class SmartviewSensorDescription:
     suggested_display_precision: int | None = None
     force_update: bool = False
     unit_of_measurement: str | None = None
-    suggested_unit_of_measurement: str | None = None
     has_entity_name: bool = False
     name: str | None = None
     translation_key: str | None = None
     value_fn: Callable[[dict[int, dict[str, Any]], float], float] | None = None
-
-    @property
-    def suggested_unit_of_measurement(self) -> str | None:
-        """Return the suggested unit of measurement."""
-        return self.native_unit
-
-    @property
-    def entity_registry_enabled_default(self) -> bool:
-        """Return if the entity should be enabled when first added to the entity registry."""
-        return self.enabled_default
 
     def get_value(self, cluster_data: dict[int, dict[str, Any]], gas_kwh_per_m3: float) -> float | None:
         """Resolve value from cluster payload."""

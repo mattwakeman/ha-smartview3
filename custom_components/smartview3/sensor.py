@@ -85,6 +85,7 @@ class Smartview3Sensor(CoordinatorEntity[Smartview3Coordinator], SensorEntity):
         self._attr_native_unit_of_measurement = description.native_unit
         self._attr_device_class = description.device_class
         self._attr_state_class = description.state_class
+        self._attr_force_update = description.force_update
 
     @property
     def device_info(self) -> DeviceInfo:
