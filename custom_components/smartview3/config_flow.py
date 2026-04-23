@@ -23,8 +23,7 @@ from .const import (
 from .serial_client import list_serial_devices
 
 
-def _select_schema(default_device: str | None = None) -> vol.Schema:
-    discovered = list_serial_devices()
+def _select_schema(discovered: list[str], default_device: str | None = None) -> vol.Schema:
     options = discovered + ["manual"]
     return vol.Schema(
         {
@@ -65,9 +64,10 @@ class Smartview3ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     },
                 )
 
+        discovered = await self.hass.async_add_executor_job(list_serial_devices)
         return self.async_show_form(
             step_id="user",
-            data_schema=_select_schema(),
+            data_schema=_select_schema(discovered),
             errors=errors,
         )
 
@@ -105,7 +105,7 @@ class Smartview3OptionsFlow(config_entries.OptionsFlow):
                 )
 
         current_serial = self._entry.options.get(CONF_SERIAL_DEVICE, self._entry.data.get(CONF_SERIAL_DEVICE))
-        discovered = list_serial_devices()
+        discovered = await self.hass.async_add_executor_job(list_serial_devices)
         options = discovered + ["manual"]
         data_schema = vol.Schema(
             {
