@@ -1,0 +1,71 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Set up Smartview 3",
+        "description": "Select the Smartview 3 serial device.",
+        "data": {
+          "discovered_device": "Detected serial device",
+          "serial_device": "Manual serial device path"
+        }
+      }
+    },
+    "error": {
+      "serial_device_required": "Select a detected device or enter a manual path."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Smartview 3 options",
+        "data": {
+          "discovered_device": "Detected serial device",
+          "serial_device": "Manual serial device path",
+          "scan_interval": "Scan interval (seconds)",
+          "gas_kwh_per_m3": "Gas conversion factor (kWh per m³)",
+          "enable_diagnostic_sensors": "Enable diagnostic sensors"
+        }
+      }
+    },
+    "error": {
+      "serial_device_required": "Select a detected device or enter a manual path."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "electric_power": { "name": "Electric Power" },
+      "electric_import_energy": { "name": "Electric Import Energy" },
+      "electric_export_energy": { "name": "Electric Export Energy" },
+      "electric_bill_to_date": { "name": "Electric Bill To Date" },
+      "electric_current_day_wh": { "name": "Electric Current Day Consumption" },
+      "electric_previous_day_wh": { "name": "Electric Previous Day Consumption" },
+      "electric_current_week_wh": { "name": "Electric Current Week Consumption" },
+      "electric_previous_week_wh": { "name": "Electric Previous Week Consumption" },
+      "electric_current_month_wh": { "name": "Electric Current Month Consumption" },
+      "electric_previous_month_wh": { "name": "Electric Previous Month Consumption" },
+      "gas_volume": { "name": "Gas Volume" },
+      "gas_energy": { "name": "Gas Energy" },
+      "gas_bill_to_date": { "name": "Gas Bill To Date" },
+      "gas_current_day_wh": { "name": "Gas Current Day Consumption" },
+      "gas_previous_day_wh": { "name": "Gas Previous Day Consumption" },
+      "gas_current_week_wh": { "name": "Gas Current Week Consumption" },
+      "gas_previous_week_wh": { "name": "Gas Previous Week Consumption" },
+      "gas_current_month_wh": { "name": "Gas Current Month Consumption" },
+      "gas_previous_month_wh": { "name": "Gas Previous Month Consumption" },
+      "electric_cost_day": { "name": "Electric Current Day Cost" },
+      "electric_cost_week": { "name": "Electric Current Week Cost" },
+      "electric_cost_month": { "name": "Electric Current Month Cost" },
+      "gas_cost_day": { "name": "Gas Current Day Cost" },
+      "gas_cost_week": { "name": "Gas Current Week Cost" },
+      "gas_cost_month": { "name": "Gas Current Month Cost" },
+      "total_current_day_cost": { "name": "Total Current Day Cost" },
+      "total_current_week_cost": { "name": "Total Current Week Cost" },
+      "total_current_month_cost": { "name": "Total Current Month Cost" }
+    },
+    "binary_sensor": {
+      "low_battery": {
+        "name": "Low Battery"
+      }
+    }
+  }
+}
