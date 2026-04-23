@@ -30,6 +30,12 @@ class SmartviewSensorDescription:
     options: dict[str, Any] | None = None
     icon: str | None = None
     suggested_display_precision: int | None = None
+    force_update: bool = False
+    unit_of_measurement: str | None = None
+    suggested_unit_of_measurement: str | None = None
+    has_entity_name: bool = False
+    name: str | None = None
+    translation_key: str | None = None
     value_fn: Callable[[dict[int, dict[str, Any]], float], float] | None = None
 
     @property

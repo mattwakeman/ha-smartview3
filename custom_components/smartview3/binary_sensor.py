@@ -31,6 +31,11 @@ class SmartviewBinaryDescription:
     entity_category: str | None = None
     options: dict[str, Any] | None = None
     icon: str | None = None
+    force_update: bool = False
+    unit_of_measurement: str | None = None
+    has_entity_name: bool = False
+    name: str | None = None
+    translation_key: str | None = None
 
     @property
     def entity_registry_enabled_default(self) -> bool:
@@ -68,8 +73,6 @@ class Smartview3BinarySensor(
 ):
     """Binary sensor based on Smartview status bitmaps."""
 
-    _attr_has_entity_name = True
-
     def __init__(
         self,
         coordinator: Smartview3Coordinator,
@@ -80,7 +83,6 @@ class Smartview3BinarySensor(
         self.entity_description = description
         self._entry = entry
         self._attr_translation_key = description.key
-        self._attr_name = None
         self._attr_unique_id = f"{entry.entry_id}_{description.key}"
         self._attr_device_class = description.device_class
 

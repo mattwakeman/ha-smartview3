@@ -71,8 +71,6 @@ async def async_setup_entry(
 class Smartview3Sensor(CoordinatorEntity[Smartview3Coordinator], SensorEntity):
     """Representation of a Smartview mapped sensor."""
 
-    _attr_has_entity_name = True
-
     def __init__(
         self,
         coordinator: Smartview3Coordinator,
@@ -83,7 +81,6 @@ class Smartview3Sensor(CoordinatorEntity[Smartview3Coordinator], SensorEntity):
         self.entity_description = description
         self._entry = entry
         self._attr_translation_key = description.key
-        self._attr_name = None
         self._attr_unique_id = f"{entry.entry_id}_{description.key}"
         self._attr_native_unit_of_measurement = description.native_unit
         self._attr_device_class = description.device_class
@@ -132,8 +129,6 @@ class Smartview3CombinedCostSensor(
 ):
     """Combined electric+gas cost sensor for a period."""
 
-    _attr_has_entity_name = True
-
     def __init__(
         self,
         coordinator: Smartview3Coordinator,
@@ -146,7 +141,6 @@ class Smartview3CombinedCostSensor(
         self._entry = entry
         self._attribute = attribute
         self._attr_translation_key = translation_key
-        self._attr_name = None
         self._attr_unique_id = f"{entry.entry_id}_{unique_suffix}"
 
     @property
