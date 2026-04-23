@@ -66,17 +66,23 @@ class Smartview3Coordinator(DataUpdateCoordinator[SmartviewData]):
             raise UpdateFailed(f"Serial read failed: {err}") from err
 
         # Preserve existing data if no new samples
-        meter_data: dict[str, dict[int, dict[int, dict[str, Any]]]] = (
-            defaultdict(lambda: defaultdict(dict))
-            if not self.data
-            else defaultdict(lambda: defaultdict(dict), {
-                k: {int_ck: {int_ak: dict(v) for int_ak, v in int_av.items()}
-                    for int_ck, int_av in v.items()}
-                for k, v in self.data["meters"].items()
-            })
-        )
+        if not self.data:
+            meter_data: dict[str, dict[int, dict[int, dict[str, Any]]]] = defaultdict(
+                lambda: defaultdict(dict)
+            )
+        else:
+            # Deep copy existing data
+            meter_data = {
+                k: {ck: {ak: dict(av) for ak, av in cav.items()}
+                    for ck, cav in cv.items()}
+                for k, cv in self.data["meters"].items()
+            }
         for sample in samples:
             meter_key = sample.meter.hex()
+            if meter_key not in meter_data:
+                meter_data[meter_key] = defaultdict(dict)
+            if sample.cluster not in meter_data[meter_key]:
+                meter_data[meter_key][sample.cluster] = {}
             meter_data[meter_key][sample.cluster].update(sample.parameters)
             self._update_meter_role(meter_key, sample)
 
