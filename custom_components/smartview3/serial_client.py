@@ -83,6 +83,8 @@ class Smartview3SerialClient:
         samples: list[SmartviewSample] = []
         for packet in packets:
             decoded = value_decoder(decode_data_block(packet))
+            if decoded is None:
+                continue
             samples.append(
                 SmartviewSample(
                     meter=decoded["meter"],

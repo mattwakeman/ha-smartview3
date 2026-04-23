@@ -92,10 +92,10 @@ def decode_data_block(data: bytes) -> bytes:
     return bytes(output_data)
 
 
-def value_decoder(data: bytes) -> dict[str, Any]:
+def value_decoder(data: bytes) -> dict[str, Any] | None:
     """Decode a Smartview block into meter, cluster, and attributes."""
     if len(data) < 7:
-        raise ValueError("Decoded frame too short")
+        return None
 
     meter_id = data[1:3]
     cluster = int.from_bytes(data[4:6], "little")
