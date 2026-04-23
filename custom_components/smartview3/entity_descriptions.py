@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Callable
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Any
 
 from homeassistant.components.sensor import SensorDeviceClass, SensorStateClass
@@ -32,6 +33,8 @@ class SmartviewSensorDescription:
     icon: str | None = None
     suggested_display_precision: int | None = None
     suggested_unit_of_measurement: str | None = None
+    last_reset: datetime | None = None
+    last_reset_fn: Callable[[], datetime] | None = None
     force_update: bool = False
     unit_of_measurement: str | None = None
     has_entity_name: bool = False
