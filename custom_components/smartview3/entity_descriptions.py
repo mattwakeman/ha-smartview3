@@ -26,6 +26,8 @@ class SmartviewSensorDescription:
     state_class: SensorStateClass | None = None
     enabled_default: bool = True
     entity_registry_visible_default: bool = True
+    entity_category: str | None = None
+    options: dict[str, Any] | None = None
     value_fn: Callable[[dict[int, dict[str, Any]], float], float] | None = None
 
     @property
