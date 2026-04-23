@@ -26,6 +26,12 @@ class SmartviewBinaryDescription:
     attribute: int
     bitmask: int
     device_class: BinarySensorDeviceClass | None = None
+    enabled_default: bool = True
+
+    @property
+    def entity_registry_enabled_default(self) -> bool:
+        """Return if the entity should be enabled when first added to the entity registry."""
+        return self.enabled_default
 
 
 BINARY_DESCRIPTIONS: tuple[SmartviewBinaryDescription, ...] = (
