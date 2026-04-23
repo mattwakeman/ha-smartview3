@@ -80,8 +80,8 @@ class Smartview3Sensor(CoordinatorEntity[Smartview3Coordinator], SensorEntity):
         super().__init__(coordinator)
         self.entity_description = description
         self._entry = entry
-        self._attr_translation_key = description.key
         self._attr_unique_id = f"{entry.entry_id}_{description.key}"
+        self._attr_name = description.key
         self._attr_native_unit_of_measurement = description.native_unit
         self._attr_device_class = description.device_class
         self._attr_state_class = description.state_class
@@ -140,8 +140,8 @@ class Smartview3CombinedCostSensor(
         super().__init__(coordinator)
         self._entry = entry
         self._attribute = attribute
-        self._attr_translation_key = translation_key
         self._attr_unique_id = f"{entry.entry_id}_{unique_suffix}"
+        self._attr_name = unique_suffix
 
     @property
     def device_info(self) -> DeviceInfo:
