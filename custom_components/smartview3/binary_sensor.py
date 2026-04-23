@@ -27,6 +27,7 @@ class SmartviewBinaryDescription:
     bitmask: int
     device_class: BinarySensorDeviceClass | None = None
     enabled_default: bool = True
+    entity_registry_visible_default: bool = True
 
     @property
     def entity_registry_enabled_default(self) -> bool:

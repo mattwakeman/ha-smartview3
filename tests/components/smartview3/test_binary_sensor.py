@@ -31,11 +31,11 @@ def _build_entity(status_value: int | None) -> Smartview3BinarySensor:
     entry = MockConfigEntry(domain="smartview3", data={"serial_device": "/dev/ttyUSB0"})
     description = SmartviewBinaryDescription(
         key="low_battery",
-        name="Low Battery",
         meter_role=METER_ROLE_ELECTRIC,
         cluster=Cluster.METERING,
         attribute=MeteringParameter.STATUS,
         bitmask=0x01,
+        device_class=BinarySensorDeviceClass.BATTERY,
     )
     return Smartview3BinarySensor(_FakeCoordinator(status_value), entry, description)
 
