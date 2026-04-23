@@ -31,6 +31,7 @@ class SmartviewSensorDescription:
     options: dict[str, Any] | None = None
     icon: str | None = None
     suggested_display_precision: int | None = None
+    suggested_unit_of_measurement: str | None = None
     force_update: bool = False
     unit_of_measurement: str | None = None
     has_entity_name: bool = False
