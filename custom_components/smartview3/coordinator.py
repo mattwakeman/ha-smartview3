@@ -65,8 +65,11 @@ class Smartview3Coordinator(DataUpdateCoordinator[SmartviewData]):
         except (SerialException, ValueError) as err:
             raise UpdateFailed(f"Serial read failed: {err}") from err
 
-        meter_data: dict[str, dict[int, dict[int, dict[str, Any]]]] = defaultdict(
-            lambda: defaultdict(dict)
+        # Preserve existing data if no new samples
+        meter_data: dict[str, dict[int, dict[int, dict[str, Any]]]] = (
+            defaultdict(lambda: defaultdict(dict))
+            if not self.data
+            else {k: dict(v) for k, v in self.data["meters"].items()}
         )
         for sample in samples:
             meter_key = sample.meter.hex()
@@ -74,7 +77,11 @@ class Smartview3Coordinator(DataUpdateCoordinator[SmartviewData]):
             self._update_meter_role(meter_key, sample)
 
         roles = {role: meter for meter, role in self._meter_map.items()}
-        last_ts = max((s.received_ts for s in samples), default=self.data.get(ATTR_LAST_PACKET_TS))
+        last_ts = (
+            max((s.received_ts for s in samples), default=self.data.get(ATTR_LAST_PACKET_TS))
+            if samples
+            else self.data.get(ATTR_LAST_PACKET_TS) if self.data else None
+        )
         self.data = {"meters": meter_data, "roles": roles, ATTR_LAST_PACKET_TS: last_ts}
         return self.data
 
