@@ -148,9 +148,7 @@ def value_decoder(data: bytes) -> dict[str, Any]:
             value = int.from_bytes(data[marker : marker + 4], "little", signed=False)
             marker += 4
         else:
-            raise ValueError(
-                f"Unrecognised encoding 0x{encoding:02X} for attribute 0x{attribute:04X}"
-            )
+            value = None
 
         parameters[attribute] = {"type": encoding, "value": value}
 
