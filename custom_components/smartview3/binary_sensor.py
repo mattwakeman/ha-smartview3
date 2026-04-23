@@ -30,6 +30,7 @@ class SmartviewBinaryDescription:
     entity_registry_visible_default: bool = True
     entity_category: str | None = None
     options: dict[str, Any] | None = None
+    icon: str | None = None
 
     @property
     def entity_registry_enabled_default(self) -> bool:

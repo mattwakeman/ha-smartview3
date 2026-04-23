@@ -28,6 +28,7 @@ class SmartviewSensorDescription:
     entity_registry_visible_default: bool = True
     entity_category: str | None = None
     options: dict[str, Any] | None = None
+    icon: str | None = None
     value_fn: Callable[[dict[int, dict[str, Any]], float], float] | None = None
 
     @property
