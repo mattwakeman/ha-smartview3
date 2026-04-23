@@ -73,7 +73,7 @@ def _bill_to_date(attr: int) -> Callable[[dict[int, dict[str, Any]], float], flo
 
 
 def _prepayment_currency(attr: int) -> Callable[[dict[int, dict[str, Any]], float], float]:
-    return lambda cluster_data, _: float(cluster_data[attr]["value"]) / 100000
+    return lambda cluster_data, _: round(float(cluster_data[attr]["value"]) / 100000, 2)
 
 
 def _gas_m3_to_kwh(attr: int) -> Callable[[dict[int, dict[str, Any]], float], float]:
@@ -270,6 +270,7 @@ SENSOR_DESCRIPTIONS: tuple[SmartviewSensorDescription, ...] = (
         meter_role=METER_ROLE_ELECTRIC,
         cluster=Cluster.PREPAYMENT,
         attribute=PrepaymentParameter.CURRENT_DAY_COST_CONSUMPTION_DELIVERED,
+        icon="mdi:currency-gbp",
         value_fn=_prepayment_currency(PrepaymentParameter.CURRENT_DAY_COST_CONSUMPTION_DELIVERED),
     ),
     SmartviewSensorDescription(
@@ -277,6 +278,7 @@ SENSOR_DESCRIPTIONS: tuple[SmartviewSensorDescription, ...] = (
         meter_role=METER_ROLE_ELECTRIC,
         cluster=Cluster.PREPAYMENT,
         attribute=PrepaymentParameter.CURRENT_WEEK_COST_CONSUMPTION_DELIVERED,
+        icon="mdi:currency-gbp",
         value_fn=_prepayment_currency(PrepaymentParameter.CURRENT_WEEK_COST_CONSUMPTION_DELIVERED),
     ),
     SmartviewSensorDescription(
@@ -284,6 +286,7 @@ SENSOR_DESCRIPTIONS: tuple[SmartviewSensorDescription, ...] = (
         meter_role=METER_ROLE_ELECTRIC,
         cluster=Cluster.PREPAYMENT,
         attribute=PrepaymentParameter.CURRENT_MONTH_COST_CONSUMPTION_DELIVERED,
+        icon="mdi:currency-gbp",
         value_fn=_prepayment_currency(PrepaymentParameter.CURRENT_MONTH_COST_CONSUMPTION_DELIVERED),
     ),
     SmartviewSensorDescription(
@@ -291,6 +294,7 @@ SENSOR_DESCRIPTIONS: tuple[SmartviewSensorDescription, ...] = (
         meter_role=METER_ROLE_GAS,
         cluster=Cluster.PREPAYMENT,
         attribute=PrepaymentParameter.CURRENT_DAY_COST_CONSUMPTION_DELIVERED,
+        icon="mdi:currency-gbp",
         value_fn=_prepayment_currency(PrepaymentParameter.CURRENT_DAY_COST_CONSUMPTION_DELIVERED),
     ),
     SmartviewSensorDescription(
@@ -298,6 +302,7 @@ SENSOR_DESCRIPTIONS: tuple[SmartviewSensorDescription, ...] = (
         meter_role=METER_ROLE_GAS,
         cluster=Cluster.PREPAYMENT,
         attribute=PrepaymentParameter.CURRENT_WEEK_COST_CONSUMPTION_DELIVERED,
+        icon="mdi:currency-gbp",
         value_fn=_prepayment_currency(PrepaymentParameter.CURRENT_WEEK_COST_CONSUMPTION_DELIVERED),
     ),
     SmartviewSensorDescription(
@@ -305,6 +310,7 @@ SENSOR_DESCRIPTIONS: tuple[SmartviewSensorDescription, ...] = (
         meter_role=METER_ROLE_GAS,
         cluster=Cluster.PREPAYMENT,
         attribute=PrepaymentParameter.CURRENT_MONTH_COST_CONSUMPTION_DELIVERED,
+        icon="mdi:currency-gbp",
         value_fn=_prepayment_currency(PrepaymentParameter.CURRENT_MONTH_COST_CONSUMPTION_DELIVERED),
     ),
 )
