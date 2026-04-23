@@ -69,7 +69,11 @@ class Smartview3Coordinator(DataUpdateCoordinator[SmartviewData]):
         meter_data: dict[str, dict[int, dict[int, dict[str, Any]]]] = (
             defaultdict(lambda: defaultdict(dict))
             if not self.data
-            else {k: dict(v) for k, v in self.data["meters"].items()}
+            else defaultdict(lambda: defaultdict(dict), {
+                k: {int_ck: {int_ak: dict(v) for int_ak, v in int_av.items()}
+                    for int_ck, int_av in v.items()}
+                for k, v in self.data["meters"].items()
+            })
         )
         for sample in samples:
             meter_key = sample.meter.hex()
